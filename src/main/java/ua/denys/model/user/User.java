@@ -1,4 +1,4 @@
-package ua.denys.model;
+package ua.denys.model.user;
 
 import jakarta.persistence.*;
 import lombok.Builder;
