@@ -10,12 +10,12 @@ import ua.denys.exception.InvalidUsernameOrPasswordException;
 import java.io.IOException;
 
 import static jakarta.servlet.http.HttpServletResponse.SC_BAD_REQUEST;
+import static ua.denys.consts.ErrorMessage.INCORRECT_DATA_EXCEPTION_MESSAGE;
 
 public class BankAuthenticationFailureHandler implements AuthenticationFailureHandler {
     @Override
     public void onAuthenticationFailure(HttpServletRequest request, HttpServletResponse response, AuthenticationException exception) throws IOException, ServletException {
-        final var errorMessage = "Incorrect user's data, please check fields";
-        response.sendError(SC_BAD_REQUEST, errorMessage);
-        throw new InvalidUsernameOrPasswordException(errorMessage);
+        response.sendError(SC_BAD_REQUEST, INCORRECT_DATA_EXCEPTION_MESSAGE);
+        throw new InvalidUsernameOrPasswordException(INCORRECT_DATA_EXCEPTION_MESSAGE);
     }
 }
