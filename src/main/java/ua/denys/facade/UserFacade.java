@@ -3,15 +3,19 @@ package ua.denys.facade;
 import jakarta.servlet.http.HttpServletRequest;
 import lombok.RequiredArgsConstructor;
 import org.springframework.security.authentication.UsernamePasswordAuthenticationToken;
+import org.springframework.security.core.authority.SimpleGrantedAuthority;
 import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.security.core.userdetails.UsernameNotFoundException;
+import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.security.web.authentication.WebAuthenticationDetails;
 import org.springframework.stereotype.Component;
 import ua.denys.exception.UsernameIsExistsException;
 import ua.denys.model.user.User;
 import ua.denys.model.user.UserSignUpProjection;
 import ua.denys.repository.UserRepository;
-import ua.denys.security.configuration.PasswordEncryptorService;
+import ua.denys.security.service.AuthenticationManager;
+
+import java.util.Collections;
 
 import static ua.denys.enums.Role.USER;
 
@@ -21,6 +25,7 @@ public class UserFacade {
 
     private final UserRepository userRepository;
     private final HttpServletRequest httpServletRequest;
+    private final BCryptPasswordEncoder passwordEncoder;
 
     public User findUserByUsernameOrThrowException(String username) {
         final var userOptional = userRepository.findByUsername(username);
@@ -31,7 +36,7 @@ public class UserFacade {
     public User registerUser(UserSignUpProjection projection) {
         final var username = projection.getUsername();
         projection.setPassword(
-                PasswordEncryptorService.generateHashPassword(
+                passwordEncoder.encode(
                         projection.getPassword()));
 
         if (checkUsernameExisting(username))
@@ -44,7 +49,7 @@ public class UserFacade {
         buildedUser.setUsername(username);
         buildedUser.setPassword(projection.getPassword());
 
-        final var authentication = new UsernamePasswordAuthenticationToken(username, projection.getPassword());
+        final var authentication = new UsernamePasswordAuthenticationToken(username, projection.getPassword(), Collections.singleton(new SimpleGrantedAuthority("USER")));
         authentication.setDetails(new WebAuthenticationDetails(httpServletRequest));
 
         SecurityContextHolder.getContext().setAuthentication(authentication);
@@ -53,6 +58,11 @@ public class UserFacade {
 
     public boolean checkUsernameExisting(String username) {
         return userRepository.existsByUsername(username);
+    }
+
+    public String getFirstName(){
+        final var username = AuthenticationManager.getUsername();
+        return findUserByUsernameOrThrowException(username).getFirstName();
     }
 
 }
