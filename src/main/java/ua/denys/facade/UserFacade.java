@@ -13,7 +13,8 @@ import ua.denys.exception.UsernameIsExistsException;
 import ua.denys.model.user.User;
 import ua.denys.model.user.UserSignUpProjection;
 import ua.denys.repository.UserRepository;
-import ua.denys.security.service.AuthenticationManager;
+import ua.denys.security.service.BankAuthenticationManager;
+import ua.denys.security.service.BankAuthenticationService;
 
 import java.util.Collections;
 
@@ -61,7 +62,7 @@ public class UserFacade {
     }
 
     public String getFirstName(){
-        final var username = AuthenticationManager.getUsername();
+        final var username = BankAuthenticationService.getUsername();
         return findUserByUsernameOrThrowException(username).getFirstName();
     }
 
