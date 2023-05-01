@@ -4,6 +4,7 @@ import jakarta.persistence.*;
 import lombok.Builder;
 import lombok.Data;
 import lombok.experimental.FieldDefaults;
+import ua.denys.enums.Role;
 
 import static lombok.AccessLevel.PRIVATE;
 
@@ -18,4 +19,7 @@ public class User {
     Long id;
     String username;
     String password;
+    String firstName;
+    String lastName;
+    Role role;
 }
