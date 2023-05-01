@@ -17,7 +17,8 @@ public class BankUserDetailsService implements UserDetailsService {
 
     @Override
     public UserDetails loadUserByUsername(String username) throws UsernameNotFoundException {
-        final var user = userFacade.findUserByUsername(username);
+        final var user = userFacade.findUserByUsernameOrThrowException(username);
+
         return User.builder()
                 .username(user.getUsername())
                 .password(user.getPassword())

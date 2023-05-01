@@ -5,12 +5,12 @@
     <title>Login to your bank account</title>
 </head>
 <body>
-    <form th:action="@{/register}" method="post">
+    <form th:action="@{/register}" method="post" th:object="${userSignup}">
         <span><h2>Register to the bank system</h2></span>
         <input type="text" name="firstName" placeholder="First name"><br>
         <input type="text" name="lastName" placeholder="Last name"><br>
-        <input type="text" name="name" placeholder="Username"><br>
-        <input type="password" name="pass" placeholder="Password"><br>
+        <input type="text" name="username" placeholder="Username"><br>
+        <input type="password" name="password" placeholder="Password"><br>
         <span th:value="@{errorMessage}"/><br>
         <input type="submit" value="Register">
     </form>

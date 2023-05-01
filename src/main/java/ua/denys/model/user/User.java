@@ -1,25 +1,28 @@
 package ua.denys.model.user;
 
-import jakarta.persistence.*;
+import jakarta.persistence.Entity;
+import jakarta.persistence.GeneratedValue;
+import jakarta.persistence.GenerationType;
+import jakarta.persistence.Id;
+import jakarta.persistence.Table;
+import lombok.AllArgsConstructor;
 import lombok.Builder;
 import lombok.Data;
-import lombok.experimental.FieldDefaults;
+import lombok.Getter;
+import lombok.NoArgsConstructor;
+import lombok.Setter;
 import ua.denys.enums.Role;
-
-import static lombok.AccessLevel.PRIVATE;
 
 @Entity
 @Table(name = "users")
 @Data
-@FieldDefaults(level = PRIVATE)
-@Builder
 public class User {
     @Id
     @GeneratedValue(strategy = GenerationType.AUTO)
-    Long id;
-    String username;
-    String password;
-    String firstName;
-    String lastName;
-    Role role;
+    private Long id;
+    private String username;
+    private String password;
+    private String firstName;
+    private String lastName;
+    private Role role;
 }

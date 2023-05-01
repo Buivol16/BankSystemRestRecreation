@@ -14,7 +14,9 @@ import static ua.denys.consts.ErrorMessage.INCORRECT_DATA_EXCEPTION_MESSAGE;
 
 @RequiredArgsConstructor
 public class BankAuthenticationFailureHandler implements AuthenticationFailureHandler {
+
     private final LoginController loginController;
+
     @Override
     public void onAuthenticationFailure(HttpServletRequest request, HttpServletResponse response, AuthenticationException exception) throws IOException {
         response.sendError(SC_BAD_GATEWAY, INCORRECT_DATA_EXCEPTION_MESSAGE);

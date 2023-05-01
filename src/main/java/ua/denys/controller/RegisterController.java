@@ -1,26 +1,34 @@
 package ua.denys.controller;
 
-import jakarta.servlet.http.HttpServletResponse;
+import lombok.RequiredArgsConstructor;
+import lombok.SneakyThrows;
 import org.springframework.stereotype.Controller;
+import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PostMapping;
-import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
+import ua.denys.facade.UserFacade;
 import ua.denys.model.user.UserSignUpProjection;
-
-import java.io.IOException;
 
 @Controller
 @RequestMapping("/register")
+@RequiredArgsConstructor
 public class RegisterController {
+
+    private final UserFacade userFacade;
+
     @GetMapping
-    public String registerPage(){
+    public String registerPage(Model model){
+        final var signupUser = new UserSignUpProjection();
+        model.addAttribute("userSignup", signupUser);
         return "registerPage";
     }
 
+    @SneakyThrows
     @PostMapping
-    public void registerUser(@RequestBody UserSignUpProjection userSignUpProjection) throws IOException {
-
+    public String registerUser(UserSignUpProjection userSignUpProjection) {
+        userFacade.registerUser(userSignUpProjection);
+        return "redirect://home";
     }
 
 }
