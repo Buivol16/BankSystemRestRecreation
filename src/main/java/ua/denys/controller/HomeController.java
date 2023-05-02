@@ -13,10 +13,13 @@ import ua.denys.facade.UserFacade;
 public class HomeController {
 
     private final UserFacade userFacade;
+    private final
 
     @GetMapping
     public String home(Model model){
+
         model.addAttribute("title", "Welcome, " + userFacade.getFirstName());
+        model.addAttribute("card-num", );
         return "bankindexpage";
     }
 }

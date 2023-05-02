@@ -2,9 +2,14 @@
 <html lang="en" xmlns:th="http://www.w3.org/1999/xhtml">
 <head>
     <meta charset="UTF-8">
-    <title th:value="${title}"/>
+    <title th:text="${title}"></title>
 </head>
 <body>
-
+    <div>
+        <label>Your card number:</label><br>
+        <label th:text="${card-num}"></label><br>
+        <label>Your CVV code:</label><br>
+        <label th:text="${card-cvv-num}"></label>
+    </div>
 </body>
 </html>

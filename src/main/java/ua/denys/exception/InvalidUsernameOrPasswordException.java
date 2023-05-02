@@ -1,6 +1,8 @@
 package ua.denys.exception;
 
-public class InvalidUsernameOrPasswordException extends RuntimeException{
+import org.springframework.security.core.AuthenticationException;
+
+public class InvalidUsernameOrPasswordException extends AuthenticationException {
     public InvalidUsernameOrPasswordException(String msg) {
         super(msg);
     }
