@@ -3,13 +3,18 @@
 <head>
     <meta charset="UTF-8">
     <title th:text="${title}"></title>
+    <link rel="shortcut icon" th:href="${iconFile}" type="image/x-icon">
 </head>
 <body>
     <div>
         <label>Your card number:</label><br>
-        <label th:text="${card-num}"></label><br>
+        <label th:text="${cardNum}"></label><br>
         <label>Your CVV code:</label><br>
-        <label th:text="${card-cvv-num}"></label>
+        <label th:text="${cardCvvNum}"></label>
+    </div>
+    <div>
+        <button th:formaction="@{/transfermoney}">Transfer money</button>
+        <button th:formaction="@{/payservices}">Pay for services</button>
     </div>
 </body>
 </html>
