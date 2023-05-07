@@ -24,7 +24,7 @@ public class BankUserDetailsService implements UserDetailsService{
                 .password(user.getPassword())
                 .authorities(
                         new SimpleGrantedAuthority(
-                                user.getRole().name()))
+                                user.getRole()))
                 .build();
     }
 }

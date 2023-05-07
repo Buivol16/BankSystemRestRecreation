@@ -1,11 +1,14 @@
 package ua.denys.model.user;
 
+import lombok.AccessLevel;
 import lombok.Data;
+import lombok.experimental.FieldDefaults;
 
 @Data
+@FieldDefaults(level = AccessLevel.PRIVATE)
 public class UserSignUpProjection {
-    private String firstName;
-    private String lastName;
-    private String username;
-    private String password;
+    String firstName;
+    String lastName;
+    String username;
+    String password;
 }

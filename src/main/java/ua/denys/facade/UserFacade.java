@@ -1,6 +1,7 @@
 package ua.denys.facade;
 
 import lombok.RequiredArgsConstructor;
+import org.mapstruct.factory.Mappers;
 import org.springframework.security.core.userdetails.UsernameNotFoundException;
 import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.stereotype.Component;
@@ -9,6 +10,7 @@ import ua.denys.model.user.User;
 import ua.denys.model.user.UserSignUpProjection;
 import ua.denys.repository.UserRepository;
 import ua.denys.security.service.BankAuthenticationService;
+import ua.denys.utils.mapper.UserMapper;
 
 import static ua.denys.enums.Role.USER;
 
@@ -34,21 +36,17 @@ public class UserFacade {
         if (checkUsernameExisting(username))
             throw new UsernameIsExistsException("This username is already exists.");
 
-        final var buildedUser = new User();
-        buildedUser.setFirstName(projection.getFirstName());
-        buildedUser.setLastName(projection.getLastName());
-        buildedUser.setRole(USER);
-        buildedUser.setUsername(username);
-        buildedUser.setPassword(projection.getPassword());
-
-        return userRepository.save(buildedUser);
+        final var mapper = Mappers.getMapper(UserMapper.class);
+        final var user = mapper.signUpProjectionToUser(projection);
+        user.setRole(USER.name());
+        return userRepository.save(user);
     }
 
     public boolean checkUsernameExisting(String username) {
         return userRepository.existsByUsername(username);
     }
 
-    public String getFirstName(){
+    public String getFirstName() {
         final var username = BankAuthenticationService.getUsername();
         return findUserByUsernameOrThrowException(username).getFirstName();
     }
