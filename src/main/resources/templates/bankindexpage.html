@@ -10,7 +10,9 @@
         <label>Your card number:</label><br>
         <label th:text="${cardNum}"></label><br>
         <label>Your CVV code:</label><br>
-        <label th:text="${cardCvvNum}"></label>
+        <label th:text="${cardCvvNum}"></label><br>
+        <label>Your money count:</label><br>
+        <label th:text="${cardMoneyCount}"></label>
     </div>
     <div>
         <button th:formaction="@{/transfermoney}">Transfer money</button>

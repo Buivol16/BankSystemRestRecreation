@@ -27,6 +27,7 @@ public class HomeController {
         model.addAttribute("title", "Welcome, " + userFacade.getFirstName());
         model.addAttribute("cardNum", card.getCardNumber());
         model.addAttribute("cardCvvNum", card.getCvvCode());
+        model.addAttribute("cardMoneyCount", card.getMoneyCount()+" UAH");
         model.addAttribute("iconFile", icon);
         return "bankindexpage";
     }
