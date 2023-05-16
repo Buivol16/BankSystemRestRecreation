@@ -15,8 +15,8 @@
         <label th:text="${cardMoneyCount}"></label>
     </div>
     <div>
-        <button th:formaction="@{/transfermoney}">Transfer money</button>
-        <button th:formaction="@{/payservices}">Pay for services</button>
+        <a th:href="@{/transfermoney}"><button>Transfer money</button></a>
+        <a th:href="@{/payservices}"><button>Pay for services</button></a>
     </div>
 </body>
 </html>
