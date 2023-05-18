@@ -5,7 +5,6 @@ import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PostMapping;
-import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import ua.denys.facade.CardFacade;
 import ua.denys.facade.TransferMoneyFacade;
@@ -20,9 +19,11 @@ public class TransferController {
     private final TransferMoneyFacade transferMoneyFacade;
 
     @GetMapping
+
     public String transferMoney(Model model){
         model.addAttribute("cards", cardFacade.getCardsOfUser());
         model.addAttribute("transfer", TransferMoneyDTO.builder().build());
+        //todo errorMEssageHandler
         return "transfermoneypage";
     }
 

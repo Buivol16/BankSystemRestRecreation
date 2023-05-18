@@ -1,5 +1,6 @@
 package ua.denys.controller;
 
+import org.springframework.security.core.Authentication;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
@@ -13,7 +14,8 @@ import static ua.denys.utils.consts.ErrorMessage.INCORRECT_DATA_EXCEPTION_MESSAG
 public class LoginController {
 
     @GetMapping
-    public String loginPage(Model model, @RequestParam(required = false) String error){
+    public String loginPage(Model model, @RequestParam(required = false) String error, Authentication authentication){
+        if (authentication != null && authentication.isAuthenticated()) return "redirect:/home";
         if (error != null && error.equals("true"))
             model.addAttribute("errorMessage", INCORRECT_DATA_EXCEPTION_MESSAGE);
 

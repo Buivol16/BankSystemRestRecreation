@@ -7,13 +7,14 @@
 <body>
     <div>
         <form th:action="@{/transfermoney}" method="post" th:object="${transferDTO}">
-            <select th:field="*{cardNumber}" th:each="card :${cards}">
-                <option>[[${card.getCardNumber()}]] - [[${card.getMoneyCount()}]]UAH</option>
+            <select name="consumerCardNumber" th:each="card :${cards}">
+                <option th:value="${card.getCardNumber()}">[[${card.getCardNumber()}]] - [[${card.getMoneyCount()}]]UAH</option>
             </select><br>
             <input type="text" placeholder="Card number" name="transferCardNumber"><br>
             <input type="text" placeholder="Value to send" name="moneyCountToTransfer"><span>UAH</span><br>
             <input type="submit" value="Send"/>
         </form>
+        <label th:text="${errorMessage}"></label>
     </div>
 </body>
 </html>

@@ -6,6 +6,12 @@
     <link rel="shortcut icon" th:href="${iconFile}" type="image/x-icon">
 </head>
 <body>
+    <div align="right">
+        <label th:text="${firstLastName}"></label><br>
+        <form th:action="@{/logout}" method="post">
+            <input type="submit" value="Logout">
+        </form>
+    </div>
     <div>
         <label>Your card number:</label><br>
         <label th:text="${cardNum}"></label><br>
