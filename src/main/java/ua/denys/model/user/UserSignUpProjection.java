@@ -1,6 +1,7 @@
 package ua.denys.model.user;
 
 import lombok.AccessLevel;
+import lombok.Builder;
 import lombok.Data;
 import lombok.experimental.FieldDefaults;
 

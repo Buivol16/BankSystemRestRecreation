@@ -7,7 +7,7 @@
 <body>
     <div>
         <form th:action="@{/transfermoney}" method="post" th:object="${transferDTO}">
-            <select name="cardNumber" th:each="card :${cards}">
+            <select th:field="*{cardNumber}" th:each="card :${cards}">
                 <option>[[${card.getCardNumber()}]] - [[${card.getMoneyCount()}]]UAH</option>
             </select><br>
             <input type="text" placeholder="Card number" name="transferCardNumber"><br>

@@ -9,7 +9,7 @@ import lombok.experimental.FieldDefaults;
 @Builder
 @FieldDefaults(level = AccessLevel.PRIVATE)
 public class TransferMoneyDTO {
-    String cardNumber;
+    String consumerCardNumber;
     String transferCardNumber;
     Double moneyCountToTransfer;
 }
