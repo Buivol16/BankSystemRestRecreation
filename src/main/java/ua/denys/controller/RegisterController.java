@@ -31,7 +31,7 @@ public class RegisterController {
     public String registerUser(UserSignUpProjection userSignUpProjection) {
         final var user = userFacade.registerUser(userSignUpProjection);
         cardFacade.registerCard(user);
-        return "redirect://home";
+        return "redirect:/login";
     }
 
 }
