@@ -1,7 +1,9 @@
 package ua.denys.exception;
 
-public class UsernameIsExistsException extends RuntimeException{
-    public UsernameIsExistsException(String message) {
-        super(message);
+import jakarta.servlet.http.HttpServletResponse;
+
+public class UsernameIsExistsException extends BankException{
+    public UsernameIsExistsException(String message, HttpServletResponse response, String redirectLink) {
+        super(message, null, response, redirectLink);
     }
 }

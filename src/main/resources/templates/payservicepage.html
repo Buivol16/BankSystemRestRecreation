@@ -1,0 +1,26 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.w3.org/1999/xhtml">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+</head>
+<body>
+    <div>
+        <table>
+            <tr>
+                <th>Name</th>
+                <th>Founder</th>
+                <th>Money count</th>
+            </tr>
+            <tr th:each="debtortopay : ${debtortopays}">
+                <th>[[${debtortopay.getRentServiceToPaid().getServiceName()}]]</th>
+                <th>[[${debtortopay.getRentServiceToPaid().getFounderId().getFirstName()}]] [[${debtortopay.getRentServiceToPaid().getFounderId().getLastName()}]]</th>
+                <th>[[${debtortopay.getMoneyToPaid()}]] UAH</th>
+                <th><form th:action="@{/payservices}" method="post"><input type="submit" value="Pay"></form></th><br>
+                <span>[[${errorMessage}]]</span>
+            </tr>
+        </table>
+        <a th:href="@{/createservice}"><button>Create your own service</button></a>
+    </div>
+</body>
+</html>

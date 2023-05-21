@@ -16,11 +16,14 @@ public class RentService {
     @GeneratedValue
     @Column(name = "id")
     private Long id;
+
     @Column(name = "service_name")
     private String serviceName;
-    @Column(name = "money_count_to_pay")
-    private Double moneyCountToPay;
-    @ManyToMany(fetch = FetchType.LAZY, cascade = CascadeType.ALL)
-    @JoinColumn(name = "debtor_id")
-    private List<User> debtorId;
+
+    @ManyToOne(cascade = CascadeType.ALL)
+    @JoinColumn(name = "founder_id")
+    private User founderId;
+
+    @Column(name = "rent_cost")
+    private Double rentCost;
 }

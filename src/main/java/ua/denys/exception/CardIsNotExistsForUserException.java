@@ -1,7 +1,5 @@
 package ua.denys.exception;
 
-import jakarta.servlet.http.HttpServletResponse;
-
 import static ua.denys.utils.consts.ErrorMessage.CARD_IS_NOT_EXISTS_FOR_USER_EXCEPTION_MESSAGE;
 
 public class CardIsNotExistsForUserException extends BankException{

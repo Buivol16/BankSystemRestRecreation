@@ -1,5 +1,6 @@
 package ua.denys.facade;
 
+import jakarta.servlet.http.HttpServletResponse;
 import lombok.RequiredArgsConstructor;
 import org.mapstruct.factory.Mappers;
 import org.springframework.security.core.userdetails.UsernameNotFoundException;
@@ -11,6 +12,8 @@ import ua.denys.model.user.UserSignUpProjection;
 import ua.denys.repository.UserRepository;
 import ua.denys.security.service.BankAuthenticationService;
 import ua.denys.utils.mapper.UserMapper;
+
+import java.util.List;
 
 import static ua.denys.enums.Role.USER;
 
@@ -27,19 +30,19 @@ public class UserFacade {
         else throw new UsernameNotFoundException("Username is not exists.");
     }
 
-    public User registerUser(UserSignUpProjection projection) {
+    public User registerUser(UserSignUpProjection projection, HttpServletResponse response) {
         final var username = projection.getUsername();
         projection.setPassword(
                 passwordEncoder.encode(
                         projection.getPassword()));
 
         if (checkUsernameExisting(username))
-            throw new UsernameIsExistsException("This username is already exists.");
+            throw new UsernameIsExistsException("This username is already exists.", response, "/bank/register");
 
         final var mapper = Mappers.getMapper(UserMapper.class);
-        final var user = mapper.signUpProjectionToUser(projection);
-        user.setRole(USER.name());
-        return userRepository.save(user);
+        final var userProjection = mapper.signUpProjectionToUser(projection);
+        userProjection.setRole(USER.name());
+        return userRepository.save(userProjection);
     }
 
     public boolean checkUsernameExisting(String username) {
@@ -51,4 +54,7 @@ public class UserFacade {
         return findUserByUsernameOrThrowException(username).getFirstName();
     }
 
+    public List<User> findAll(){
+        return userRepository.findAll();
+    }
 }

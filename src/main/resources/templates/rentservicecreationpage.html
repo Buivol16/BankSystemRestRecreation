@@ -1,0 +1,15 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.w3.org/1999/xhtml">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+</head>
+<body>
+  <form th:action="@{/createservice}" method="post" th:object="${serviceCreationDTO}">
+      <input type="text" name="serviceName" placeholder="Service name">
+      <input type="number" name="rentCost" step="0.01" min="0.1" max="4" placeholder="Cost of rent"><span>UAH/min</span><br>
+      <input type="submit" value="Create"><br>
+      <span>[[${errorMessage}]]</span>
+  </form>
+</body>
+</html>
