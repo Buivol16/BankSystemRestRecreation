@@ -24,8 +24,9 @@ public class HomeController {
         final var icon = new File("src/main/resources/static/banklogo.ico");
         final var user = userFacade.findUserByUsernameOrThrowException(BankAuthenticationService.getUsername());
         final var card = cardFacade.findCardByConsumerIdOrThrowException(user);
+        final var cardNumberView = "%s %s %s".formatted(card.getCardNumber().substring(0, 4), card.getCardNumber().substring(4, 8), card.getCardNumber().substring(8, 12));
         model.addAttribute("title", "Welcome, " + userFacade.getFirstName());
-        model.addAttribute("cardNum", card.getCardNumber());
+        model.addAttribute("cardNum", cardNumberView);
         model.addAttribute("cardCvvNum", card.getCvvCode());
         model.addAttribute("cardMoneyCount", card.getMoneyCount()+" UAH");
         model.addAttribute("firstLastName", user.getFirstName() + " " + user.getLastName());
