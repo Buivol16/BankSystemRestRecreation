@@ -11,8 +11,9 @@
         <input type="text" name="lastName" placeholder="Last name"><br>
         <input type="text" name="username" placeholder="Username"><br>
         <input type="password" name="password" placeholder="Password"><br>
-        <span th:value="@{errorMessage}"/><br>
+        <span>[[${errorMessage}]]</span><br>
         <input type="submit" value="Register">
     </form>
+    <button onclick="window.history.back()">Back</button>
 </body>
 </html>

@@ -3,18 +3,28 @@
 <head>
     <meta charset="UTF-8">
     <title>Title</title>
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.4.1/jquery.min.js">
+    </script>
 </head>
 <body>
     <div>
         <form th:action="@{/transfermoney}" method="post" th:object="${transferDTO}">
             <select name="consumerCardNumber" th:each="card :${cards}">
-                <option th:value="${card.getCardNumber()}">[[${card.getCardNumber()}]] - [[${card.getMoneyCount()}]]UAH</option>
+                <option th:value="${card.getCardNumber()}">[[${card.getCardNumber()}]] - [[${card.getMoneyCount()}]] UAH</option>
             </select><br>
             <input type="text" placeholder="Card number" name="transferCardNumber"><br>
-            <input type="text" placeholder="Value to send" name="moneyCountToTransfer"><span>UAH</span><br>
+            <input type="number" step="0.01" min="0" placeholder="Value to send" name="moneyCountToTransfer"><span>UAH</span><br>
+            <label th:text="${errorMessage}"></label><br>
             <input type="submit" value="Send"/>
         </form>
-        <label th:text="${errorMessage}"></label>
+        <button onclick="window.history.back()">Back</button>
     </div>
+    <script>
+        $(function() {
+            $("input[name='transferCardNumber']").on('input', function(e) {
+                $(this).val($(this).val().replace(/[^0-9]/g, ''));
+            });
+        });
+    </script>
 </body>
 </html>

@@ -1,7 +1,9 @@
 package ua.denys.exception;
 
-public class CardIsNotExistsException extends RuntimeException{
-    public CardIsNotExistsException(String message) {
-        super(message);
+import jakarta.servlet.http.HttpServletResponse;
+
+public class CardIsNotExistsException extends BankException{
+    public CardIsNotExistsException(String message, String username, HttpServletResponse response, String redirectLink) {
+        super(message, username, response, redirectLink);
     }
 }

@@ -1,7 +1,9 @@
 package ua.denys.exception;
 
-public class SameCardException extends RuntimeException{
-    public SameCardException(String message) {
-        super(message);
+import jakarta.servlet.http.HttpServletResponse;
+
+public class SameCardException extends BankException{
+    public SameCardException(String message, String username, HttpServletResponse response, String redirectLink) {
+        super(message, username, response, redirectLink);
     }
 }

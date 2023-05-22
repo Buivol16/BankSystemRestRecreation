@@ -5,6 +5,7 @@ import org.mapstruct.factory.Mappers;
 import org.springframework.stereotype.Component;
 import ua.denys.exception.CardIsNotExistsException;
 import ua.denys.exception.CardIsNotExistsForUserException;
+import ua.denys.exception.InvalidFormatOfCardException;
 import ua.denys.model.card.Card;
 import ua.denys.model.card.CardDTO;
 import ua.denys.model.user.User;
@@ -31,8 +32,10 @@ public class CardFacade {
     }
 
     public Card findCardByCardNumberOrThrowException(String cardNum){
+        final var username = BankAuthenticationService.getUsername();
+        if (cardNum.length() != 12) throw new InvalidFormatOfCardException("Invalid format of card.", username);
         final var cardOptional = cardRepository.findByCardNumber(cardNum);
-        if (cardOptional.isEmpty()) throw new CardIsNotExistsException(CARD_IS_NOT_EXISTS_EXCEPTION_MESSAGE);
+        if (cardOptional.isEmpty()) throw new CardIsNotExistsException(CARD_IS_NOT_EXISTS_EXCEPTION_MESSAGE, username, null, null);
         return cardOptional.get();
     }
 
@@ -40,9 +43,6 @@ public class CardFacade {
         final var cardMapper = Mappers.getMapper(CardMapper.class);
         final var cardNum =
                 String.format(CARD_NUMBER_FORMAT,
-                        getNextNumber(),
-                        getNextNumber(),
-                        getNextNumber(),
                         getNextNumber(),
                         getNextNumber());
         final var cardDTO = CardDTO.builder()
