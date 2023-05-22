@@ -12,15 +12,19 @@ import java.util.concurrent.TimeUnit;
 @RequiredArgsConstructor
 public class PayableServiceScheduler {
     private final DebtorToPayRepository debtorToPayRepository;
+
     @Scheduled(timeUnit = TimeUnit.MINUTES, fixedRate = 1l)
-    public void check(){
+    public void check() {
         addDebt();
     }
 
-    private void addDebt(){
+    private void addDebt() {
         final var debtorToPays = debtorToPayRepository.findAll();
         if (debtorToPays.isEmpty()) return;
-        debtorToPays.forEach(debtorToPay -> debtorToPay.setMoneyToPaid(debtorToPay.getMoneyToPaid()*2));
+        debtorToPays.forEach(debtorToPay -> {
+            final var rentCost = debtorToPay.getRentServiceToPaid().getRentCost();
+            debtorToPay.setMoneyToPaid(debtorToPay.getMoneyToPaid() + rentCost);
+        });
         debtorToPayRepository.saveAll(debtorToPays);
     }
 }

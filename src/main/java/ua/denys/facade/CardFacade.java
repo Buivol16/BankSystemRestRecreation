@@ -33,7 +33,7 @@ public class CardFacade {
 
     public Card findCardByCardNumberOrThrowException(String cardNum){
         final var username = BankAuthenticationService.getUsername();
-        if (cardNum.length() != 24) throw new InvalidFormatOfCardException("Invalid format of card.", username);
+        if (cardNum.length() != 12) throw new InvalidFormatOfCardException("Invalid format of card.", username);
         final var cardOptional = cardRepository.findByCardNumber(cardNum);
         if (cardOptional.isEmpty()) throw new CardIsNotExistsException(CARD_IS_NOT_EXISTS_EXCEPTION_MESSAGE, username, null, null);
         return cardOptional.get();
@@ -43,9 +43,6 @@ public class CardFacade {
         final var cardMapper = Mappers.getMapper(CardMapper.class);
         final var cardNum =
                 String.format(CARD_NUMBER_FORMAT,
-                        getNextNumber(),
-                        getNextNumber(),
-                        getNextNumber(),
                         getNextNumber(),
                         getNextNumber());
         final var cardDTO = CardDTO.builder()
