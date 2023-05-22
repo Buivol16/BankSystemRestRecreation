@@ -1,0 +1,28 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.w3.org/1999/xhtml">
+<head>
+    <meta charset="UTF-8">
+    <title th:text="${title}"></title>
+    <link rel="shortcut icon" th:href="${iconFile}" type="image/x-icon">
+</head>
+<body>
+    <div align="right">
+        <label th:text="${firstLastName}"></label><br>
+        <form th:action="@{/logout}" method="post">
+            <input type="submit" value="Logout">
+        </form>
+    </div>
+    <div>
+        <label>Your card number:</label><br>
+        <label th:text="${cardNum}"></label><br>
+        <label>Your CVV code:</label><br>
+        <label th:text="${cardCvvNum}"></label><br>
+        <label>Your money count:</label><br>
+        <label th:text="${cardMoneyCount}"></label>
+    </div>
+    <div>
+        <a th:href="@{/transfermoney}"><button>Transfer money</button></a>
+        <a th:href="@{/payservices}"><button>Pay for services</button></a>
+    </div>
+</body>
+</html>
