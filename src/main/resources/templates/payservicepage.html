@@ -16,7 +16,7 @@
                 <th>[[${debtortopay.getRentServiceToPaid().getServiceName()}]]</th>
                 <th>[[${debtortopay.getRentServiceToPaid().getFounderId().getFirstName()}]] [[${debtortopay.getRentServiceToPaid().getFounderId().getLastName()}]]</th>
                 <th>[[${debtortopay.getMoneyToPaid()}]] UAH</th>
-                <th><form th:action="@{/payservices}" method="post"><input type="submit" value="Pay"></form></th><br>
+                <th><form th:action="@{/payservices/debtortopay.getId()}" method="post"><input type="submit" value="Pay"></form></th><br>
                 <span>[[${errorMessage}]]</span>
             </tr>
         </table>

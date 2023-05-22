@@ -6,13 +6,13 @@ import org.springframework.stereotype.Service;
 import ua.denys.repository.DebtorToPayRepository;
 
 import java.util.Random;
+import java.util.concurrent.TimeUnit;
 
 @Service
 @RequiredArgsConstructor
 public class PayableServiceScheduler {
     private final DebtorToPayRepository debtorToPayRepository;
-    //todo make cron expression about every minute
-    @Scheduled(cron = "")
+    @Scheduled(timeUnit = TimeUnit.MINUTES, fixedRate = 1l)
     public void check(){
         addDebt();
     }
@@ -20,10 +20,7 @@ public class PayableServiceScheduler {
     private void addDebt(){
         final var debtorToPays = debtorToPayRepository.findAll();
         if (debtorToPays.isEmpty()) return;
-        debtorToPays.forEach(debtorToPay -> {
-            final var random = new Random().nextDouble(0.01, 3);
-            debtorToPay.setMoneyToPaid(debtorToPay.getMoneyToPaid()+random);
-        });
+        debtorToPays.forEach(debtorToPay -> debtorToPay.setMoneyToPaid(debtorToPay.getMoneyToPaid()*2));
         debtorToPayRepository.saveAll(debtorToPays);
     }
 }
