@@ -1,15 +1,20 @@
 <!DOCTYPE html>
-<html lang="en" xmlns:th="http://www.w3.org/1999/xhtml">
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
 <head>
     <meta charset="UTF-8">
     <title>Login to your bank account</title>
+    <style>
+        @import url('https://fonts.googleapis.com/css2?family=Poppins:wght@500&display=swap');
+    </style>
+    <link href="../static/css/loginstyle.css" th:href="@{/css/loginstyle.css}" rel="stylesheet" />
 </head>
 <body>
-    <form th:action="@{/login}" method="post">
-        <input type="text" th:name="name" placeholder="Username"><br>
-        <input type="password" th:name="pass" placeholder="Password"><br>
+    <form th:action="@{/login}" method="post" class="form-container" align="center">
+        <span>Login to your bank account</span>
+        <input type="text" th:name="name" placeholder="Username" class="field" required><br>
+        <input type="password" th:name="pass" placeholder="Password" class="field" required><br>
         <p th:text="${errorMessage}"></p>
-        <input type="submit" value="Login"><br>
+        <input type="submit" value="Login" class="accept"><br>
         <span><a th:href="@{/register}">Don't have any account?</a></span>
     </form>
 </body>
