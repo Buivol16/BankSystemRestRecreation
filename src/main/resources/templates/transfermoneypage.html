@@ -2,22 +2,96 @@
 <html lang="en" xmlns:th="http://www.w3.org/1999/xhtml">
 <head>
     <meta charset="UTF-8">
-    <title>Title</title>
+    <title>Transfer money</title>
     <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.4.1/jquery.min.js">
     </script>
+    <style>
+        @import url('https://fonts.googleapis.com/css2?family=Poppins:wght@500&display=swap');
+    </style>
+    <style>
+           body{
+    font-family: 'Poppins', sans-serif;
+}
+.form{
+    border-radius: 5px;
+    box-shadow: 0 0 5px grey;
+    padding: 10px;
+    margin: auto;
+    width: 20rem;
+    height: 20rem;
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    transform: translateY(-50%) translateX(-50%);
+    text-align: center;
+}
+
+input{
+    margin-top: 5%;
+    margin-bottom: 5%;
+    text-align: center;
+    top: 50rem;
+    left: 50%;
+    border: 0.3px solid grey;
+    border-radius: 0px;
+    height: 5%;
+    width: 80%;
+}
+input:focus{
+    outline: none;
+}
+.accept{
+    border-radius: 5px;
+    background-color: #0077b6;
+    border: none;
+    height: 10%;
+    width: 100%;
+    color: whitesmoke;
+    box-shadow: 0 0 1px ;
+}
+.errorMessage{
+    color: red;
+    text-align: center;
+    font-size: 80%;
+    top: 48%;
+}
+.backButton{
+    border-radius: 5px;
+    background-color: #e63946;
+    border: none;
+    height: 10%;
+    width: 95%;
+    color: whitesmoke;
+    box-shadow: 0 0 1px ;
+    position: absolute;
+    text-align: center;
+    top: 85%;
+    left: 2.5%;
+}
+.accept{
+    border-radius: 5px;
+    background-color: #0077b6;
+    border: none;
+    height: 30%;
+    width: 100%;
+    color: whitesmoke;
+    box-shadow: 0 0 1px ;
+}
+    </style>
 </head>
 <body>
-    <div>
+    <div class="form">
         <form th:action="@{/transfermoney}" method="post" th:object="${transferDTO}">
+            <span>Transfer money</span><br>
             <select name="consumerCardNumber" th:each="card :${cards}">
                 <option th:value="${card.getCardNumber()}">[[${card.getCardNumber()}]] - [[${card.getMoneyCount()}]] UAH</option>
             </select><br>
-            <input type="text" placeholder="Card number" name="transferCardNumber"><br>
-            <input type="number" step="0.01" min="0" placeholder="Value to send" name="moneyCountToTransfer"><span>UAH</span><br>
-            <label th:text="${errorMessage}"></label><br>
-            <input type="submit" value="Send"/>
+            <input type="text" placeholder="Card number" name="transferCardNumber" required><br>
+            <input type="number" step="0.01" min="0" placeholder="Value to send" name="moneyCountToTransfer" required><span>UAH</span><br>
+            <label th:text="${errorMessage}" class="errorMessage"></label><br>
+            <input type="submit" value="Send" class="accept">
         </form>
-        <button onclick="window.history.back()">Back</button>
+        <a th:href="@{/home}"><button class="backButton">Back</button></a>
     </div>
     <script>
         $(function() {

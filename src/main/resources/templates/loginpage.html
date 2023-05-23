@@ -6,16 +6,62 @@
     <style>
         @import url('https://fonts.googleapis.com/css2?family=Poppins:wght@500&display=swap');
     </style>
-    <link href="../static/css/loginstyle.css" th:href="@{/css/loginstyle.css}" rel="stylesheet" />
+    <style>
+        body{
+    font-family: 'Poppins', sans-serif;
+}
+.form-container{
+    border-radius: 5px;
+    box-shadow: 0 0 5px grey;
+    padding: 20px;
+    margin: auto;
+    width: 20rem;
+    height: 20rem;
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    transform: translateY(-50%) translateX(-50%);
+}
+
+input{
+    margin-top: 5%;
+    margin-bottom: 10%;
+    text-align: center;
+    top: 50rem;
+    left: 50%;
+    border: 0.3px solid grey;
+    border-radius: 0px;
+    height: 10%;
+    width: 100%;
+}
+input:focus{
+    outline: none;
+}
+.accept{
+    border-radius: 5px;
+    background-color: #0077b6;
+    border: none;
+    height: 10%;
+    width: 100%;
+    color: whitesmoke;
+    box-shadow: 0 0 1px ;
+}
+.errorMessage{
+    color: red;
+    position: absolute;
+    text-align: center;
+    top: 48%;
+}
+    </style>
 </head>
 <body>
     <form th:action="@{/login}" method="post" class="form-container" align="center">
         <span>Login to your bank account</span>
         <input type="text" th:name="name" placeholder="Username" class="field" required><br>
         <input type="password" th:name="pass" placeholder="Password" class="field" required><br>
-        <p th:text="${errorMessage}"></p>
         <input type="submit" value="Login" class="accept"><br>
-        <span><a th:href="@{/register}">Don't have any account?</a></span>
+        <p th:text="${errorMessage}" class="errorMessage"></p>
+        <span class="registerOffer"><a th:href="@{/register}">Don't have any account?</a></span>
     </form>
 </body>
 </html>

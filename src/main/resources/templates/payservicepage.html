@@ -2,7 +2,50 @@
 <html lang="en" xmlns:th="http://www.w3.org/1999/xhtml">
 <head>
     <meta charset="UTF-8">
-    <title>Title</title>
+    <title>Pay for services</title>
+    <style>
+        @import url('https://fonts.googleapis.com/css2?family=Poppins:wght@500&display=swap');
+    </style>
+    <style>
+           body{
+    font-family: 'Poppins', sans-serif;
+}
+table{
+    border: 1px solid grey;
+    width: 100rem;
+}
+.accept{
+    border-radius: 5px;
+    background-color: #0077b6;
+    border: none;
+    height: 10%;
+    width: 100%;
+    color: whitesmoke;
+    box-shadow: 0 0 1px ;
+}
+.backButton{
+    border-radius: 5px;
+    background-color: #e63946;
+    border: none;
+    height: 10%;
+    width: 95%;
+    color: whitesmoke;
+    box-shadow: 0 0 1px ;
+    position: absolute;
+    text-align: center;
+    top: 85%;
+    left: 2.5%;
+}
+button{
+    border-radius: 5px;
+    background-color: #0077b6;
+    border: none;
+    height: 10%;
+    width: 50rem;
+    color: whitesmoke;
+    box-shadow: 0 0 1px ;
+}
+    </style>
 </head>
 <body>
     <div>
@@ -20,7 +63,7 @@
                 <span>[[${errorMessage}]]</span>
             </tr>
         </table>
-        <a th:href="@{/createservice}"><button>Create your own service</button></a><br>
+        <a th:href="@{/createservice}"><button>Create your own service</button></a>
         <a th:href="@{/home}"><button>Back to home</button></a>
     </div>
 </body>

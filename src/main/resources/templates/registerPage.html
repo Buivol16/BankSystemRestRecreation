@@ -2,18 +2,84 @@
 <html lang="en" xmlns:th="http://www.w3.org/1999/xhtml">
 <head>
     <meta charset="UTF-8">
-    <title>Login to your bank account</title>
+    <title>Register</title>
+    <style>
+        @import url('https://fonts.googleapis.com/css2?family=Poppins:wght@500&display=swap');
+    </style>
+    <style>
+        body{
+    font-family: 'Poppins', sans-serif;
+}
+.form-container{
+    border-radius: 5px;
+    box-shadow: 0 0 5px grey;
+    padding: 10px;
+    margin: auto;
+    width: 20rem;
+    height: 30rem;
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    transform: translateY(-50%) translateX(-50%);
+}
+
+input{
+    margin-top: 5%;
+    margin-bottom: 5%;
+    text-align: center;
+    top: 50rem;
+    left: 50%;
+    border: 0.3px solid grey;
+    border-radius: 0px;
+    height: 5%;
+    width: 100%;
+}
+input:focus{
+    outline: none;
+}
+.accept{
+    border-radius: 5px;
+    background-color: #0077b6;
+    border: none;
+    height: 10%;
+    width: 100%;
+    color: whitesmoke;
+    box-shadow: 0 0 1px ;
+}
+.errorMessage{
+    color: red;
+    position: absolute;
+    text-align: center;
+    top: 48%;
+}
+.text{
+    font-size: 80%
+}
+.backButton{
+    border-radius: 5px;
+    background-color: #e63946;
+    border: none;
+    height: 10%;
+    width: 95%;
+    color: whitesmoke;
+    box-shadow: 0 0 1px ;
+    position: absolute;
+    text-align: center;
+    top: 85%;
+    left: 2.5%;
+}
+    </style>
 </head>
 <body>
-    <form th:action="@{/register}" method="post" th:object="${userSignup}">
-        <span><h2>Register to the bank system</h2></span>
-        <input type="text" name="firstName" placeholder="First name"><br>
-        <input type="text" name="lastName" placeholder="Last name"><br>
-        <input type="text" name="username" placeholder="Username"><br>
-        <input type="password" name="password" placeholder="Password"><br>
-        <span>[[${errorMessage}]]</span><br>
-        <input type="submit" value="Register">
+    <form th:action="@{/register}" method="post" th:object="${userSignup}" class="form-container" align="center">
+        <span class="text"><h2>Register to the bank system</h2></span>
+        <input type="text" name="firstName" placeholder="First name" class="field" required><br>
+        <input type="text" name="lastName" placeholder="Last name" class="field" required><br>
+        <input type="text" name="username" placeholder="Username" class="field" required><br>
+        <input type="password" name="password" placeholder="Password" class="field" required><br>
+        <span class="errorMessage">[[${errorMessage}]]</span><br>
+        <input type="submit" value="Register" class="accept">
+        <button onclick="window.history.back()" class="backButton">Back</button>
     </form>
-    <button onclick="window.history.back()">Back</button>
 </body>
 </html>
